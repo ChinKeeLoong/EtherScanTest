@@ -1,0 +1,11 @@
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\bin\Debug\UpdatePrice.exe.config
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\bin\Debug\UpdatePrice.exe
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\bin\Debug\UpdatePrice.pdb
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\obj\Debug\UpdatePrice.csproj.AssemblyReference.cache
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\obj\Debug\UpdatePrice.csproj.SuggestedBindingRedirects.cache
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\obj\Debug\UpdatePrice.csproj.CoreCompileInputs.cache
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\obj\Debug\UpdatePrice.exe
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\obj\Debug\UpdatePrice.pdb
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\bin\Debug\Newtonsoft.Json.dll
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\bin\Debug\Newtonsoft.Json.xml
+C:\Users\chink\OneDrive\Desktop\EtherScan Test\UpdatePrice\UpdatePrice\obj\Debug\UpdatePrice.csproj.CopyComplete

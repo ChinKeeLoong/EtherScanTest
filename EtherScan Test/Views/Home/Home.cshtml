@@ -1,0 +1,209 @@
+﻿@model EtherScan_Test.Models.HomeModel
+
+<script>
+
+    function EditData(ID) {
+        $.ajax({
+            type: "POST",
+            url: "/Home/Home",
+            data: { ID: ID },
+            success: function (data) {
+                $("#main-content").html(data);
+            },
+            error: function (xhr, status, error) {
+                var errorM = xhr.responseText;
+                errorM = errorM.replace('""', '');
+                alert(errorM);
+                $('#loading').hide();
+            }
+        });
+    };
+</script>
+
+<body id="main-content">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            EtherScan - Test
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </div>
+    </nav>
+    <div class="container body-content">
+       
+        <div >
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Save / Update Token</h3>
+                                </div>
+                                <form>
+                                    <div class="card-body">
+
+                                        @Html.HiddenFor(model => model.ID, new { @id = "ID" })
+                                        <div class="form-group">
+                                            <label for="Name">Name</label>
+                                            @Html.TextBoxFor(model => model.Name, new { @id = "Name", @class = "form-control", @placeholder = "Please Enter Name", @type = "text" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Symbol">Symbol</label>
+                                            @Html.TextBoxFor(model => model.Symbol, new { @id = "Symbol", @class = "form-control", @placeholder = "Please Enter Symbol", @type = "text" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ContractAddress">Contract Address</label>
+                                            @Html.TextBoxFor(model => model.ContractAddress, new { @id = "ContractAddress", @class = "form-control", @placeholder = "Please Enter Contract Address", @type = "text" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="TotalSupply">Total Supply</label>
+                                            @Html.TextBoxFor(model => model.TotalSupply, new { @id = "TotalSupply", @class = "form-control", @placeholder = "Please Enter Total Supply", @type = "number" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="TotalHolders">Total Holders</label>
+                                            @Html.TextBoxFor(model => model.TotalHolders, new { @id = "TotalHolders", @class = "form-control", @placeholder = "Please Enter Total Holders", @type = "number" })
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button id="btnSave" type="button" class="btn btn-outline-info">Save</button>
+
+                                        <button id="btnReset" type="button" class="btn btn-outline-info float-right">Reset</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Donut Chart</h3>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                @*<div class="card-header">
+
+                                </div>*@
+                                <div class="card-body">
+                                    <table id="NumberOne" class="table table-bordered table-hover Table_wrapper">
+                                        <thead>
+                                            <tr>
+                                                <th>Rank</th>
+                                                <th>Symbol</th>
+                                                <th>Name</th>
+                                                <th>Contract Address</th>
+                                                <th>Total Holders</th>
+                                                <th>Total Supply</th>
+                                                <th>Total Supply %  </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.DataList)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.Rank)</td>
+                                                    <td> <a href="@item.HREF" target="_blank">@Html.DisplayFor(modelItem => item.Symbol)</a></td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.ContractAddress)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.TotalHolders)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.TotalSupply)</td>
+                                                    <td>@string.Format("{0:n2}", item.TotalSupplyPercentage)</td>
+                                                    <td>   <button class="btn btn-outline-secondary btn-block" onclick="EditData('@item.ID')">Edit</button> </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+        </div>
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Test Application</p>
+        </footer>
+    </div>
+
+</body>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+        var donutData = {
+            labels: [@Html.Raw(ViewBag.Label)],
+            datasets: [
+                {
+                    data: [@Html.Raw(ViewBag.TotalSupply)],
+                    backgroundColor: ['#FF0000', '#00FFFF', '#0000FF', '#ADD8E6', '#800080', '#FFFF00', '#00FF00', '#FF00FF', '#FFC0CB', '#808080', '#FFA500', '#A52A2A', '#800000', '#008000', '#808000', '#7FFFD4'],
+                }
+            ]
+        }
+        var donutOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+        }
+
+        new Chart(donutChartCanvas, {
+            type: 'doughnut',
+            data: donutData,
+            options: donutOptions
+        });
+
+        $('#NumberOne').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": true,
+            "searching": true,
+            "info": true,
+            "order": [[0, "asc"]],
+            dom: 'Blfrtip',
+            "buttons": ["excel", "pdf", "csv", "print"],
+            "orderCellsTop": true,
+            "fixedHeader": true,
+        });
+
+        $("#btnSave").click(function (evt) {
+            $.ajax({
+                type: "POST",
+                url: "/Home/SaveMethod",
+                data: {
+                    ID: $(document.getElementById("ID")).val(), Name: $(document.getElementById("Name")).val(), Symbol: $(document.getElementById("Symbol")).val(), TotalSupply: $(document.getElementById("TotalSupply")).val(), TotalHolders: $(document.getElementById("TotalHolders")).val(), ContractAddress: $(document.getElementById("ContractAddress")).val()
+                },
+                success: function (data) {
+                    window.location.href = "/Home/Home";
+                },
+                error: function (xhr, status, error) {
+                    var errorM = xhr.responseText;
+                    errorM = errorM.replace('""', '');
+                    alert(errorM);
+                    $('#loader').hide();
+                }
+            });
+        });
+
+        $("#btnReset").click(function (evt) {
+            window.location.href = "/Home/Home";
+        });
+
+    });
+</script>

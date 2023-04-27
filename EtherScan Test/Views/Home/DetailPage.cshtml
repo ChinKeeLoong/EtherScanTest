@@ -1,0 +1,67 @@
+﻿@model EtherScan_Test.Models.HomeModel
+
+<body id="main-content">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            EtherScan - Test
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </div>
+    </nav>
+    <div class="container body-content">
+       
+        <div >
+            <section class="content">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="NumberOne" class="table table-bordered table-hover Table_wrapper">    
+                                        <thead>
+                                            <tr>
+                                                <td colspan="2"> @Model.ContractAddress </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:30%"> Price : </td>
+                                                <td> @string.Format("{0:n2}", Model.Price)</td>
+                                            </tr>
+                                            <tr>
+                                                <td> Total Supply : </td>
+                                                <td> @Model.TotalSupply </td>
+                                            </tr>
+                                            <tr>
+                                                <td> Total Holders : </td>
+                                                <td> @Model.TotalHolders </td>
+                                            </tr>
+                                            <tr>
+                                                <td> Name : </td>
+                                                <td> @Model.Name </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+        </div>
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Test Application</p>
+        </footer>
+    </div>
+
+</body>
+
+
